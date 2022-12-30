@@ -2,9 +2,12 @@ import express, { Application, Request, Response } from "express";
 
 import cors from "cors";
 
+import authorRouter from "../Router/authorRoutes";
+import bookRouter from "../Router/bookRoutes";
+
 const PORT: number = 2000;
 
-require("../Config/db")
+require("../Config/db");
 
 const app: Application = express();
 
@@ -17,6 +20,9 @@ app.get("/", (req: Request, res: Response): Response =>{
         message: "successfully created a server"
     })
 });
+
+app.use("/api/authors", authorRouter);
+app.use("/api/books", bookRouter);
 
 app.listen(PORT, () =>{
     console.log("LISTENING TO PORT", PORT);
