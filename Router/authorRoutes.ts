@@ -10,6 +10,6 @@ router.route("/getauthors").get(getAuthor);
 router.route("/getauthor/:authorID").get(getOneAuthor);
 router.route("/createauthors").post(authorUploads, postAuthors);
 router.route("/updateauthors/:authorID").patch(updateAuthors);
-router.route("/deleteauthors").delete(deleteAuthors);
+router.route("/deleteauthors/:authorID").delete(deleteAuthors);
 
 export default router;

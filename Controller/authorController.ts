@@ -1,6 +1,6 @@
 import authorModels from "../Models/authorModels";
 
-import cloudinary from "cloudinary";
+import cloudinary from "../Config/cloudinary";
 
 import { Request, Response } from "express";
 
@@ -39,7 +39,7 @@ const getOneAuthor = async (req: Request, res: Response): Promise<Response> => {
 // Post:
 const postAuthors = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const cloudImg = await cloudinary.v2.uploader.upload(req?.file!.path)
+        const cloudImg = await cloudinary.uploader.upload(req?.file!.path)
       const { authorName, bio, authorImg } = req.body;
       const newAuthor = await authorModels.create({
         authorName,
@@ -61,7 +61,7 @@ const postAuthors = async (req: Request, res: Response): Promise<Response> => {
 // Update: 
 const updateAuthors = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const cloudImg = await cloudinary.v2.uploader.upload(req?.file!.path)
+        const cloudImg = await cloudinary.uploader.upload(req?.file!.path)
         const {bio, authorImg} = req.body;
         const authorsUpdate = await authorModels.findByIdAndUpdate(
             req.params.authorID,

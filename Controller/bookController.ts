@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import authorModels from "../Models/authorModels";
 
-import cloudinary from "cloudinary"
+import cloudinary from "../Config/cloudinary"
 
 import bookModel from "../Models/bookModels";
 
@@ -12,8 +12,8 @@ import {Request, Response} from "express";
 const createBooks = async (req: Request, res: Response): Promise<Response> =>{
     try {
         const {title, category, summary} = req.body;
-        const cloudImg = await cloudinary.v2.uploader.upload(req?.file!.path);
-        const myAuthor = authorModels.findById(req.params.authorBookID);
+        const cloudImg = await cloudinary.uploader.upload(req?.file!.path);
+        const myAuthor = await authorModels.findById(req.params.authorBookID);
         const newBooks = await bookModel.create({
             title,
             category,

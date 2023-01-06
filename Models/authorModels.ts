@@ -20,10 +20,12 @@ const authorSchema = new mongoose.Schema({
     authorImage: {
         type: String,
     },
-    books: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "booksCollections",
-    }
+    books: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "booksCollections",
+        }
+    ]
 });
 
 const authorModels = mongoose.model<iAuthors>("authorsCollections", authorSchema);

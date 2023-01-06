@@ -25,5 +25,6 @@ app.use("/api/authors", authorRouter);
 app.use("/api/books", bookRouter);
 
 app.listen(PORT, () =>{
+    console.log("");
     console.log("LISTENING TO PORT", PORT);
 })
