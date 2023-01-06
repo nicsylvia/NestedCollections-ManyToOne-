@@ -29,6 +29,7 @@ const createBooks = async (req: Request, res: Response): Promise<Response> =>{
             data: newBooks
         })
     } catch (error) {
+        console.log(error);
         return res.status(201).json({
             message: "Couldn't create a new book",
             data: error
@@ -83,4 +84,22 @@ const deleteBooks = async (req: Request, res: Response): Promise<Response> =>{
     }
 }
 
-export {getAllBooks, getOneBooks, deleteBooks, createBooks};
+// getAuthorBooks:
+const getAuthorBook = async(req: Request, res: Response): Promise<Response> =>{
+    try {
+        const myAuthor = await authorModels.findById(req.params.authorID).populate({
+            path: "books"
+        })
+        return res.status(200).json({
+            message: "Successfully got all Authors Books",
+            data: myAuthor
+        })
+    } catch (error) {
+        return res.status(400).json({
+            message: "An error occured in getting Authors books",
+            data: error
+        })
+    }
+}
+
+export {getAllBooks, getOneBooks, deleteBooks, createBooks, getAuthorBook};
